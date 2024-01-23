@@ -20,7 +20,7 @@ sample_rate = 16000
 
 frame_length = 20
 
-preprocessing_flag = False
+preprocessing_flag = True
 training_flag = False
 
 def spec2wave( spec, angles, sample_rate=16000, n_fft=512 ):
@@ -80,7 +80,7 @@ def main():
         model.load_state_dict( torch.load( "./trained_model/model-30-cpu.pth", map_location=torch.device( device ) ) )
 
     ### Main process ###
-    input = args[ 2 ]
+    input = "input"
     input_audio, angles = preprocess.getSTFT( input, sample_rate, num_frames, n_fft )
     input_audio = ( input_audio - min_x ) / ( max_x - min_x )
     input_audio = torch.from_numpy( input_audio.astype( np.float32 ) ).clone().detach()
