@@ -11,6 +11,8 @@ In implementation, we construct neural network based on study by Ahmet E Bulut e
 
 There are other efficient audio denoising technique such as Wave-U-Net[4].  The implementation is complex compared to U-Net CNN since the method should receive wave data as input. On the other hand, U-Net CNN is input image data same as original U-Net algorithm. Thus, we can implement simply and reduce computation time to obtain the output.
 
+This is the project created in the master's class with some modifications and functions added
+
 ## Usage
 ```
 pip3 install -r requirements.txt
