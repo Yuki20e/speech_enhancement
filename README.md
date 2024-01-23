@@ -12,15 +12,15 @@ In implementation, we construct neural network based on study by Ahmet E Bulut e
 There are other efficient audio denoising technique such as Wave-U-Net[4].  The implementation is complex compared to U-Net CNN since the method should receive wave data as input. On the other hand, U-Net CNN is input image data same as original U-Net algorithm. Thus, we can implement simply and reduce computation time to obtain the output.
 
 ## Usage
-'''
+```
 pip3 install -r requirements.txt
 python3 main.py [cpu, mps, cuda]
-'''
+```
 引数は自分の環境に合わせて指定してください.
 
 ## Dataset
 モデルを作成したい場合はデータセットを下記のリンクからダウンロードし展開してdatasetディレクトリにおいてください.\
-訓練データは, "clean_trainset_28spk_wav.zip"と"noisy_trainset_28spk_wav.zip "になります.
+訓練データは, "clean_trainset_28spk_wav.zip"と"noisy_trainset_28spk_wav.zip "になります.\
 [https://datashare.ed.ac.uk/handle/10283/2791](https://datashare.ed.ac.uk/handle/10283/2791)
 
 次に, データセットの前処理を行うため初回(もしくは再度前処理をしたい場合)はmain.pyのpreprocessing_flagをTrueに変更してください.\
@@ -31,7 +31,7 @@ preprocessing_flag = Falseにした場合, そのディレクトリからデー�
 訓練されたモデルを作成するためにはmain.py内のtraining_flagをTrueにしてください. 
 trained_modelというディレクトリが作られて,その中に訓練済みのモデルが作成されます.
 
-また,訓練済みのモデルを使いたい場合には下記のリンクからダウンロードし,trained_modelというディレクトリ内に置いてください.
+また,訓練済みのモデルを使いたい場合には下記のリンクからダウンロードし,trained_modelというディレクトリ内に置いてください.\
 [https://www.dropbox.com/scl/fi/iuatae6ia3t1b98xufn1c/model-30-cpu.pth?rlkey=psoii7ooqfgqq3e4ea8hfvuey&dl=0](https://www.dropbox.com/scl/fi/iuatae6ia3t1b98xufn1c/model-30-cpu.pth?rlkey=psoii7ooqfgqq3e4ea8hfvuey&dl=0)
 
 
