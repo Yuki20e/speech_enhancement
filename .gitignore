@@ -1,0 +1,8 @@
+__pycache__
+.*
+!.gitignore
+!.gitkeep
+dataset/clean_testset_wav/*.wav
+dataset/noisy_testset_wav/*.wav
+dataset/clean_trainset_28spk_wav/*.wav
+dataset/noisy_trainset_28spk_wav/*.wav
