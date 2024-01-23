@@ -65,13 +65,13 @@ def main():
     train_Y = torch.tensor( train_Y, dtype=torch.float32 )
 
     ### Training ###
-    model_name = os.getcwd() + "/trained_model/model-30-" + args[ 1 ] +".pth"
+    # model_name = os.getcwd() + "/trained_model/model-30-" + args[ 1 ] +".pth"
     model_name_cpu = os.getcwd() + "/trained_model/model-30-cpu.pth"
     model = UNet().to( device )
     if training_flag:
         model, loss = training( model, device, lr, train_X, train_Y, 30, batch_size )
         model_cpu = model.to( 'cpu' )
-        torch.save( model.state_dict(), model_name )
+        # torch.save( model.state_dict(), model_name )
         torch.save( model_cpu.state_dict(), model_name_cpu )
     else:
         model.load_state_dict( torch.load( "./trained_model/model-30.pth", map_location=torch.device( device ) ) )
