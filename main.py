@@ -10,7 +10,7 @@ from scipy import signal as sg
 from scipy.io import wavfile
 from matplotlib import pyplot as plt
 
-numpy_data_path = os.getcwd() + "/spectrogram/numpy_data/"
+numpy_data_path = os.getcwd() + "/numpy_data/"
 down_sample = 16000
 num_frames = 16
 lr = 0.0001
@@ -65,6 +65,9 @@ def main():
     train_Y = torch.tensor( train_Y, dtype=torch.float32 )
 
     ### Training ###
+    if not os.path.exists( os.getcwd() + "/trained_model" ):
+        # If the dircetry does not exist, we create it.
+        os.makedirs( os.getcwd() + "/trained_model" )
     # model_name = os.getcwd() + "/trained_model/model-30-" + args[ 1 ] +".pth"
     model_name_cpu = os.getcwd() + "/trained_model/model-30-cpu.pth"
     model = UNet().to( device )
@@ -74,7 +77,7 @@ def main():
         # torch.save( model.state_dict(), model_name )
         torch.save( model_cpu.state_dict(), model_name_cpu )
     else:
-        model.load_state_dict( torch.load( "./trained_model/model-30.pth", map_location=torch.device( device ) ) )
+        model.load_state_dict( torch.load( "./trained_model/model-30-cpu.pth", map_location=torch.device( device ) ) )
 
     ### Main process ###
     input = args[ 2 ]
@@ -88,17 +91,23 @@ def main():
     input_specs = eval.combineFrames( input_audio, frame_length )
     combined_angles = eval.combineFrames( angles, frame_length )
 
-    test_index = 0
-    fig = plt.figure( figsize=( 12, 5 ) )
-    fig.suptitle( "Noised spectrogram (left), denoised (right)" )
+    if not os.path.exists( os.getcwd() + "/output" ):
+    # If the dircetry does not exist, we create it.
+        os.makedirs( os.getcwd() + "/output" )
 
-    ax0 = fig.add_subplot( 1, 2, 1 )
-    ax0.imshow( input_specs[ test_index ] )
-    ax0.invert_yaxis()
+    for i in range( output_specs.shape[ 0 ] ):
+        fig = plt.figure( figsize=( 12, 5 ) )
+        fig.suptitle( "Noised spectrogram (left), denoised (right)" )
 
-    ax1 = fig.add_subplot( 1, 2, 2 )
-    ax1.imshow( output_specs[ test_index ] )
-    ax1.invert_yaxis()
+        ax0 = fig.add_subplot( 1, 2, 1 )
+        ax0.imshow( input_specs[ i ] )
+        ax0.invert_yaxis()
+
+        ax1 = fig.add_subplot( 1, 2, 2 )
+        ax1.imshow( output_specs[ i ] )
+        ax1.invert_yaxis()
+
+        fig.savefig( "./output/out_" + str( i ) + ".png" )
 
     # wav出力実装予定
     # output_wave = list()
@@ -106,8 +115,6 @@ def main():
     #     output_wave.append( spec2wave( output_specs[ i ], combined_angles[ i ] ) )
     #     # soundfile.write( file='./output/out-' + str(i) + ".wav", data=output_wave[ i ], samplerate=sample_rate )
     #     wavfile.write( './output/out-' + str(i) + ".wav", sample_rate, output_wave[ i ] )
-
-    plt.show()
 
 
     
