@@ -19,19 +19,27 @@ pip3 install -r requirements.txt
 python3 main.py [cpu, mps, cuda]
 ```
 引数は自分の環境に合わせて指定してください.
+You can choose to use cpu, mps or cuda in training. 
 
 ## Dataset
 モデルを作成したい場合はデータセットを下記のリンクからダウンロードし展開してdatasetディレクトリにおいてください.\
 訓練データは, "clean_trainset_28spk_wav.zip"と"noisy_trainset_28spk_wav.zip "になります.\
+If you want to create a AI model, you can download and unzip the datasets from below link, and you should put to the "dataset" directory.\
+Then, training data are "clean_trainset_28spk_wav.zip" and "noisy_trainset_28spk_wav.zip."\
 [https://datashare.ed.ac.uk/handle/10283/2791](https://datashare.ed.ac.uk/handle/10283/2791)
 
 次に, データセットの前処理を行うため初回(もしくは再度前処理をしたい場合)はmain.pyのpreprocessing_flagをTrueに変更してください.\
-numpy_dataというディレクトリが作成されその中に前処理されたデータが保存されます.
-preprocessing_flag = Falseにした場合, そのディレクトリからデータを読み込むようになります.
+numpy_dataというディレクトリが作成されその中に前処理されたデータが保存されます.\
+preprocessing_flag = Falseにした場合, そのディレクトリからデータを読み込むようになります.\
+When you preprocess for the first time, you need to set "preprocessing_flag" to True in main.py.
+The preprocessd data is saved in "numpy_data" directory. After that, if you set the flag to False, you can load the preprocessed data from that directory.
 
 ## Model
 訓練されたモデルを作成するためにはmain.py内のtraining_flagをTrueにしてください. 
 trained_modelというディレクトリが作られて,その中に訓練済みのモデルが作成されます.
+
+If you want to create a new AI model, you need to set "training_flag" to True in main.py same as preprocessing step.\
+Then, "trained_model" directory is created and you can find the trained model in that directory.
 
 また,訓練済みのモデルを使いたい場合には下記のリンクからダウンロードし,trained_modelというディレクトリ内に置いてください.\
 [https://www.dropbox.com/scl/fi/iuatae6ia3t1b98xufn1c/model-30-cpu.pth?rlkey=psoii7ooqfgqq3e4ea8hfvuey&dl=0](https://www.dropbox.com/scl/fi/iuatae6ia3t1b98xufn1c/model-30-cpu.pth?rlkey=psoii7ooqfgqq3e4ea8hfvuey&dl=0)
@@ -42,9 +50,9 @@ trained_modelというディレクトリが作られて,その中に訓練済み
 対象となる入力データはinputディレクトリに置き, その出力スペクトログラムは outputディレクトリ内に保存されます.
 入力データについて, 1secほどの短いものは使用上エラーを起こすので,なるべく5sec以上でお願いします. 
 
-## Future work
-ノイズが除去された音源の可視化をできるようになったので, 実際にwavに出力してみます. また, リアルタイムにノイズを除去して実際の通話でも応用したいと思います.
-
+You can see how the noisy audio is denoised in the spectrogram images using trained model.
+The input data is places in the "input" directory and the output spectrograms is put in the "output" directory.
+The input data should be longet than 5 sec.
 
 ## References
 [1] Cassia Valentini-Botinhao et al., "Noisy epeech database for training speechenhancement algorithms and tts models", University of Edinburgh. School of Informatics. Centre for Speech Technology Research (CSTR), 2017. \
