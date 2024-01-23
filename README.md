@@ -31,7 +31,8 @@ Then, training data are "clean_trainset_28spk_wav.zip" and "noisy_trainset_28spk
 次に, データセットの前処理を行うため初回(もしくは再度前処理をしたい場合)はmain.pyのpreprocessing_flagをTrueに変更してください.\
 numpy_dataというディレクトリが作成されその中に前処理されたデータが保存されます.\
 preprocessing_flag = Falseにした場合, そのディレクトリからデータを読み込むようになります.\
-When you preprocess for the first time, you need to set "preprocessing_flag" to True in main.py.
+
+When you preprocess for the first time, you need to set "preprocessing_flag" to True in main.py.\
 The preprocessd data is saved in "numpy_data" directory. After that, if you set the flag to False, you can load the preprocessed data from that directory.
 
 ## Model
